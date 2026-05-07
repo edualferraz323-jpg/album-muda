@@ -1089,28 +1089,42 @@ async function buildRepetidas(collection){
     hasRep=true;
     const c=COLLABORATORS.find(x=>x.id==id);
     if(!c) return;
-    const best=getBest(rars);
-    const extras=rars.length-1;
-    // show extras (all except best)
-    const allRarsSorted=[...rars].sort((a,b)=>RARITY_ORDER.indexOf(a)-RARITY_ORDER.indexOf(b));
-    // show each duplicate
-    allRarsSorted.slice(0,extras).forEach(rar=>{
-      const wrap=document.createElement('div');
-      wrap.className='rep-cromo-wrap';
-      const badge=document.createElement('div');
-      badge.className='rep-badge';
-      badge.textContent='+'+extras;
-      const cromo=buildCromo(c,rar);
-      cromo.onclick=null; // override
-      const offerBtn=document.createElement('button');
-      offerBtn.className='offer-btn';
-      offerBtn.textContent='OFERECER';
-      offerBtn.onclick=()=>openOfferModal(c,rar);
-      wrap.appendChild(badge);
-      wrap.appendChild(cromo);
-      wrap.appendChild(offerBtn);
-      grid.appendChild(wrap);
-    });
+    // Total extras = all copies beyond 1 (regardless of rarity)
+    const totalExtras=rars.length-1;
+    // Count per rarity
+    const rarCount={};
+    rars.forEach(r=>{rarCount[r]=(rarCount[r]||0)+1;});
+    // Show extras per rarity (all copies beyond 1), badge shows TOTAL extras
+    for(const rar of RARITY_ORDER){
+      const cnt=rarCount[rar]||0;
+      if(cnt<2) continue; // only 1 copy of this rarity, skip
+      const extrasThisRar=cnt-1;
+      for(let ei=0;ei<extrasThisRar;ei++){
+        const wrap=document.createElement('div');
+        wrap.className='rep-cromo-wrap';
+        const badge=document.createElement('div');
+        badge.className='rep-badge';
+        badge.textContent='+'+extrasThisRar; // show extras per rarity
+        const cromo=buildCromo(c,rar);
+        cromo.onclick=null;
+        const offerBtn=document.createElement('button');
+        offerBtn.className='offer-btn';
+        offerBtn.textContent='OFERECER';
+        offerBtn.onclick=()=>openOfferModal(c,rar);
+        wrap.appendChild(badge);
+        wrap.appendChild(cromo);
+        wrap.appendChild(offerBtn);
+        // Show upgrade button on first card of this rarity if 5+ extras of same rarity
+        if(ei===0 && extrasThisRar>=5 && RARITY_UP[rar]){
+          const upBtn=document.createElement('button');
+          upBtn.className='upgrade-btn';
+          upBtn.textContent='⬆ EVOLUIR (5x)';
+          upBtn.onclick=()=>performUpgrade(parseInt(id),rar);
+          wrap.appendChild(upBtn);
+        }
+        grid.appendChild(wrap);
+      }
+    }
   });
   if(!hasRep){
     const msg=document.createElement('div');
