@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Muda Paisagismo — Álbum 2025</title>
+<title>Muda Paisagismo — Álbum 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -502,7 +502,7 @@ body{font-family:'Lato',sans-serif;background:#f2ede3;color:#2c2416;min-height:1
 <div id="app-collab" style="display:none;">
   <div class="app-header">
     <div class="brand">🌿 Muda Paisagismo</div>
-    <div class="brand-sub" id="collab-subtitle">Álbum · 2025</div>
+    <div class="brand-sub" id="collab-subtitle">Álbum · 2026</div>
   </div>
   <nav class="main-nav">
     <button class="mnb active" onclick="collabTab('album',this)">Álbum</button>
@@ -704,7 +704,7 @@ body{font-family:'Lato',sans-serif;background:#f2ede3;color:#2c2416;min-height:1
 <div id="app-admin" style="display:none;">
   <div class="app-header">
     <div class="brand">🌿 Muda Paisagismo</div>
-    <div class="brand-sub">Painel Admin · 2025</div>
+    <div class="brand-sub">Painel Admin · 2026</div>
   </div>
   <div class="admin-view">
     <div class="card-box adm-auction-box">
@@ -848,7 +848,7 @@ body{font-family:'Lato',sans-serif;background:#f2ede3;color:#2c2416;min-height:1
 <div id="app-login">
   <div class="app-header">
     <div class="brand">🌿 Muda Paisagismo</div>
-    <div class="brand-sub">Álbum de Colaboradores · 2025</div>
+    <div class="brand-sub">Álbum de Colaboradores · 2026</div>
   </div>
   <div style="padding:40px 24px;max-width:360px;margin:0 auto;text-align:center;">
     <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;color:#2c4a2e;margin-bottom:8px;">Entrar no Álbum</div>
@@ -1057,7 +1057,7 @@ const RARITIES=[
   {id:'vermelho',label:'Vermelho',w:2},
 ];
 const RARITY_ORDER=['vermelho','dourado','prata','bronze','branco'];
-const ADMIN_SECRET='muda-admin-2025';
+const ADMIN_SECRET='muda-admin-2026';
 const BASE_URL='album.mudapaisagismo.com.br';
 
 
@@ -2455,7 +2455,7 @@ async function loadCollabApp(){
   }
   if(!data) data={packs:0,collection:[],trades:[]};
 
-  document.getElementById('collab-subtitle').textContent=currentUser.name+' · 2025';
+  document.getElementById('collab-subtitle').textContent=currentUser.name+' · 2026';
   const totalPacks=data.packs+(data.specialPacks?.length||0);
   document.getElementById('pack-count').textContent=totalPacks;
   const btn=document.getElementById('open-btn');
@@ -3235,7 +3235,7 @@ function copyText(txt,btn){
 
 // ─── LOGIN ───
 // IDs dos colaboradores que participam do álbum
-const ALBUM_PLAYERS=new Set([1,2,4,6,11,13,14,15]);
+const ALBUM_PLAYERS=new Set([1,2,4,6,11,13,14,15,34]);
 
 function buildLoginSelect(){
   const sel=document.getElementById('login-sel');
